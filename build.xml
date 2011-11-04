@@ -94,22 +94,22 @@
 
   <!-- target: deploy -->
   <target name="deploy" depends="clean,resolve,jar" description="--> deploy artifact to maven repo">
-    <artifact:pom id="mypom"  groupId="org.apache" artifactId="hello-ivy" version="1.0" name="Example Ant/Ivy project.">
+    
+    <artifact:pom id="mypom"  groupId="org.apache" artifactId="hello-ivy" version="1.0-SNAPSHOT" name="Example Ant/Ivy project.">
       <license name="apache" url="http://www.apache.org"/>
-      <dependency groupId="commons-lang" artifactId="commons-lang" version="2.0"/>
-      <dependency groupId="commons-cli" artifactId="commons-cli" version="1.0"/>
     </artifact:pom>
 
-    <artifact:writepom pomRefId="mypom" file="${build.dir}/mypom.xml"/>
+    <artifact:writepom pomRefId="mypom" file="${build.dir}/pom.xml"/>
 
     <artifact:install file="${build.dir}/jar/hello.jar">
-      <pom refid="mypom" file="${build.dir}/mypom.xml"/>
+      <pom refid="mypom" file="${build.dir}/pom.xml"/>
     </artifact:install>
 
-    <!-- <artifact:deploy file="${build.dir}/jar/hello.jar">
-      <remoteRepository url="file:///www/repository"/>
-      <pom refid="mypom"/>
-    </artifact:deploy> -->
+    <artifact:install-provider artifactId="wagon-http" version="1.0-beta-2"/>
+    <artifact:deploy file="${build.dir}/jar/hello.jar">
+      <remoteRepository id="artifactory" url="http://localhost:8081/artifactory/libs-snapshot-local"/>
+      <pom refid="mypom" file="${build.dir}/pom.xml"/>
+    </artifact:deploy>
   </target>
 
   <!-- Fetch Ivy -->
