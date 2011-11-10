@@ -20,6 +20,14 @@
   xmlns:ivy="antlib:org.apache.ivy.ant"
   xmlns:artifact="antlib:org.apache.maven.artifact.ant">
 
+    <!-- Sonar task def -->
+    <taskdef uri="antlib:org.sonar.ant" resource="org/sonar/ant/antlib.xml" />
+    <property name="sonar.host.url" value="http://localhost:9000" />
+    <property name="sonar.jdbc.url" value="jdbc:derby://localhost:9527/sonar" />
+    <property name="sonar.jdbc.driverClassName" value="org.apache.derby.jdbc.ClientDriver" />
+    <property name="sonar.jdbc.username" value="sonar" />
+    <property name="sonar.jdbc.password" value="sonar" />
+   
     <!-- some variables used -->
     <property name="lib.dir" value="lib" />
     <property name="build.dir" value="build" />
@@ -145,6 +153,13 @@
         <taskdef resource="org/apache/ivy/ant/antlib.xml"
                  uri="antlib:org.apache.ivy.ant" classpathref="ivy.lib.path"/>
     </target>
+
+<target name="sonar" depends="report" >
+    <!-- list of mandatories Sonar properties -->
+    <property name="sonar.sources" value="src" />
+ 
+    <sonar:sonar key="org.apache:hello-ivy" version="1.0-SNAPSHOT" xmlns:sonar="antlib:org.sonar.ant"/>
+  </target>
 
 
 </project>
