@@ -92,7 +92,7 @@
   <!-- target: jar -->
   <target name="jar">
     <mkdir dir="${build.dir}/jar"/>
-    <jar destfile="${build.dir}/jar/Hello.jar" basedir="${build.dir}">
+    <jar destfile="${build.dir}/jar/hello.jar" basedir="${build.dir}">
             <manifest>
                 <attribute name="Main-Class" value="example.Hello"/>
             </manifest>
