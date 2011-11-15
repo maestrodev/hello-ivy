@@ -45,7 +45,6 @@
           target: resolve              
          ================================= -->
     <target name="resolve" description="--> retreive dependencies with ivy">
-        <ivy:configure/>
         <ivy:retrieve/>
             
     </target>    
