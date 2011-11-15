@@ -114,7 +114,7 @@
 
     <artifact:install-provider artifactId="wagon-http" version="1.0-beta-2"/>
     <artifact:deploy file="${build.dir}/jar/hello.jar">
-      <remoteRepository id="artifactory" url="http://localhost:8081/artifactory/libs-snapshot-local"/>
+      <remoteRepository id="artifactory" url="http://${artifactory.host}:8081/artifactory/libs-snapshot-local"/>
       <pom refid="mypom" file="${build.dir}/pom.xml"/>
     </artifact:deploy>
   </target>
