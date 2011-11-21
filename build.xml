@@ -78,6 +78,8 @@
               <exclude name="src/**" />
               <exclude name="build.xml" />
               <exclude name="ivy.xml" />
+              <exclude name="README" />
+              <exclude name="ivysettings.xml" />
           </fileset>
       </delete>
     </target>
