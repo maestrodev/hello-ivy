@@ -101,25 +101,35 @@
         </jar>
   </target>
 
-  <!-- target: deploy -->
-  <target name="deploy" depends="clean,resolve,jar" description="--> deploy artifact to maven repo">
-    
-    <artifact:pom id="mypom"  groupId="org.apache" artifactId="hello-ivy" version="1.0-SNAPSHOT" name="Example Ant/Ivy project.">
-      <license name="apache" url="http://www.apache.org"/>
-    </artifact:pom>
-
-    <artifact:writepom pomRefId="mypom" file="${build.dir}/pom.xml"/>
-
-    <artifact:install file="${build.dir}/jar/hello.jar">
-      <pom refid="mypom" file="${build.dir}/pom.xml"/>
-    </artifact:install>
-
-    <artifact:install-provider artifactId="wagon-http" version="1.0-beta-2"/>
-    <artifact:deploy file="${build.dir}/jar/hello.jar">
-      <remoteRepository url="http://demozz.maestrodev.net:8082/archiva/repository/snapshots"/>
-      <pom refid="mypom" file="${build.dir}/pom.xml"/>
-    </artifact:deploy>
+  <target name="pom">
+	  <artifact:pom id="mypom"  groupId="org.apache" artifactId="hello-ivy" version="1.0-SNAPSHOT" name="Example Ant/Ivy project.">
+		  <license name="apache" url="http://www.apache.org"/>
+	  </artifact:pom>
+	  
+	  <artifact:writepom pomRefId="mypom" file="${build.dir}/pom.xml" trim="false" />
   </target>
+
+  <!-- target: deploy -->
+  <target name="deploy" depends="clean,resolve,jar,pom" description="--> deploy artifact to maven repo">
+
+
+	  <artifact:install file="${build.dir}/jar/hello.jar">
+		  <pom refid="mypom" file="${build.dir}/pom.xml"/>
+	  </artifact:install>
+
+	  <artifact:install-provider artifactId="wagon-http" version="1.0-beta-2"/>
+	  <artifact:mvn>
+		  <arg value="org.apache.maven.plugins:maven-deploy-plugin:2.6:deploy-file" />
+		  <arg value="-Durl=http://demozz.maestrodev.net:8082/archiva/repository/snapshots" />
+		  <arg value="-DrepositoryId=maestro-snapshots" />
+		  <arg value="-DpomFile=${build.dir}/pom.xml" />
+		  <arg value="-Dfile=${build.dir}/jar/hello.jar" />
+	  </artifact:mvn> 
+	  <!-- <artifact:deploy file="${build.dir}/jar/hello.jar">
+	  <remoteRepository id="maestro-snapshots" url="http://demozz.maestrodev.net:8082/archiva/repository/snapshots" />
+	  <pom refid="mypom" file="${build.dir}/pom.xml"/>
+  </artifact:deploy>-->
+</target>
 
   <!-- Fetch Ivy -->
   <property name="ivy.install.version" value="2.2.0" />
