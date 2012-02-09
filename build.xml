@@ -116,7 +116,7 @@
 
     <artifact:install-provider artifactId="wagon-http" version="1.0-beta-2"/>
     <artifact:deploy file="${build.dir}/jar/hello.jar">
-      <remoteRepository id="maestro-deploy" url="http://demozz.maestrodev.net:8082/archiva/repository/snapshots"/>
+      <remoteRepository id="maestro-snapshots" url="http://demozz.maestrodev.net:8082/archiva/repository/snapshots"/>
       <pom refid="mypom" file="${build.dir}/pom.xml"/>
     </artifact:deploy>
   </target>
