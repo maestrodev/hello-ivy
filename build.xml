@@ -120,8 +120,8 @@
 	  <artifact:install-provider artifactId="wagon-http" version="1.0-beta-2"/>
 	  <artifact:mvn>
 		  <arg value="org.apache.maven.plugins:maven-deploy-plugin:2.6:deploy-file" />
-		  <arg value="-Durl=http://localhost:8081/artifactory/repo/libs-snapshot-local" />
-		  <arg value="-DrepositoryId=artifactory" />
+		  <arg value="-Durl=http://localhost:8081/artifactory/libs-snapshot-local" />
+		  <arg value="-DrepositoryId=snapshots" />
 		  <arg value="-DpomFile=${build.dir}/pom.xml" />
 		  <arg value="-Dfile=${build.dir}/jar/hello.jar" />
 	  </artifact:mvn> 
