@@ -75,11 +75,8 @@
     <target name="clean" description="--> clean the project">
         <delete includeemptydirs="true">
             <fileset dir="${basedir}">
-              <exclude name="src/**" />
-              <exclude name="build.xml" />
-              <exclude name="ivy.xml" />
-              <exclude name="README" />
-              <exclude name="ivysettings.xml" />
+              <include name="build/**" />
+              <include name="lib/**" />
           </fileset>
       </delete>
     </target>
