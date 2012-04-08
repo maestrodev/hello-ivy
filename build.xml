@@ -109,13 +109,17 @@
 	  <artifact:writepom pomRefId="mypom" file="${build.dir}/pom.xml" trim="false" />
   </target>
 
-  <!-- target: deploy -->
-  <target name="deploy" depends="clean,resolve,jar,pom" description="--> deploy artifact to maven repo">
-
+  <!-- target: install -->
+  <target name="install" depends="clean,resolve,jar,pom" description="--> install artifact to local maven repo">
 
 	  <artifact:install file="${build.dir}/jar/hello.jar">
 		  <pom refid="mypom" file="${build.dir}/pom.xml"/>
 	  </artifact:install>
+
+  </target>
+
+  <!-- target: deploy -->
+  <target name="deploy" depends="install" description="--> deploy artifact to maven repo">
 
 	  <artifact:install-provider artifactId="wagon-http" version="1.0-beta-2"/>
 	  <artifact:mvn>
@@ -126,10 +130,10 @@
 		  <arg value="-Dfile=${build.dir}/jar/hello.jar" />
 	  </artifact:mvn> 
 	  <!-- <artifact:deploy file="${build.dir}/jar/hello.jar">
-	  <remoteRepository id="maestro-snapshots" url="http://demozz.maestrodev.net:8082/archiva/repository/snapshots" />
-	  <pom refid="mypom" file="${build.dir}/pom.xml"/>
-  </artifact:deploy>-->
-</target>
+  	  <remoteRepository id="maestro-snapshots" url="http://demozz.maestrodev.net:8082/archiva/repository/snapshots" />
+  	  <pom refid="mypom" file="${build.dir}/pom.xml"/>
+    </artifact:deploy>-->
+  </target>
 
   <!-- Fetch Ivy -->
   <property name="ivy.install.version" value="2.2.0" />
