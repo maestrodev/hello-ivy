@@ -1,3 +1,4 @@
 <ivysettings>
     <include url="${ivy.default.settings.dir}/ivysettings.xml"/>
+    <include url="${user.home}/.ant/ivysettings.xml"/>
 </ivysettings>
